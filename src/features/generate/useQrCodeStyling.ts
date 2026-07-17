@@ -157,6 +157,7 @@ export function useQrCodeStyling() {
     onFileClear: attachedFileState.clearFile,
     isMultiFrame: qrFrames.isMultiFrame,
     frameCount: qrFrames.frames.length,
+    compressedLength: qrFrames.compressedLength,
     frameIndex: qrFrames.frameIndex,
     setFrameIndex: qrFrames.setFrameIndex,
     isPlaying: qrFrames.isPlaying,

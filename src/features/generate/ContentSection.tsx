@@ -17,6 +17,7 @@ export function ContentSection({
   onChange,
   isMultiFrame,
   frameCount,
+  compressedLength,
   attachedFile,
   fileError,
   onFileSelect,
@@ -26,6 +27,7 @@ export function ContentSection({
   onChange: (value: string) => void
   isMultiFrame: boolean
   frameCount: number
+  compressedLength: number
   attachedFile: AttachedFileMeta | null
   fileError: string | null
   onFileSelect: (file: File) => void
@@ -53,12 +55,17 @@ export function ContentSection({
             rows={5}
             className="w-full resize-none rounded-lg border border-stone-200 bg-white p-3 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100 dark:border-stone-800 dark:bg-stone-900 dark:focus:ring-brand-700/30"
           />
-          <div className="mt-1.5 flex items-center gap-1.5 text-xs text-stone-400">
+          <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-stone-400">
             <span>{value.length} karakter</span>
+            {value.length > 0 && (
+              <span className="text-stone-300 dark:text-stone-600">
+                (terkompresi ke {compressedLength} karakter)
+              </span>
+            )}
             {isMultiFrame && !attachedFile && (
               <span className="flex items-center gap-1 font-medium text-brand-600 dark:text-brand-400">
                 <Repeat size={12} />
-                Teks panjang — otomatis jadi {frameCount} QR bergantian
+                Masih kepanjangan — otomatis jadi {frameCount} QR bergantian
               </span>
             )}
           </div>

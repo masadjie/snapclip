@@ -36,6 +36,7 @@ export function GeneratePage() {
                     onChange={qr.setText}
                     isMultiFrame={qr.isMultiFrame}
                     frameCount={qr.frameCount}
+                    compressedLength={qr.compressedLength}
                     attachedFile={qr.attachedFile}
                     fileError={qr.fileError}
                     onFileSelect={qr.onFileSelect}

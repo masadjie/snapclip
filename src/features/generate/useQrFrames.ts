@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { buildFrames, FRAME_INTERVAL_MS } from '../../lib/textCodec'
+import { buildFrames, compressText, FRAME_INTERVAL_MS } from '../../lib/textCodec'
 
 /**
  * Turns text into one or more QR payload frames (see lib/textCodec) and, when
@@ -7,7 +7,9 @@ import { buildFrames, FRAME_INTERVAL_MS } from '../../lib/textCodec'
  * can scan the whole sequence and reassemble the original text.
  */
 export function useQrFrames(text: string) {
-  const frames = useMemo(() => buildFrames(text.trim().length > 0 ? text : ' '), [text])
+  const normalizedText = text.trim().length > 0 ? text : ' '
+  const frames = useMemo(() => buildFrames(normalizedText), [normalizedText])
+  const compressedLength = useMemo(() => compressText(normalizedText).length, [normalizedText])
   const [frameIndex, setFrameIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(true)
 
@@ -25,6 +27,7 @@ export function useQrFrames(text: string) {
 
   return {
     frames,
+    compressedLength,
     frameData: frames[frameIndex],
     frameIndex,
     setFrameIndex,
