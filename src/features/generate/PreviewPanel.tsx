@@ -1,6 +1,6 @@
 import type { RefObject } from 'react'
 import type { FileExtension } from 'qr-code-styling'
-import { Check, ClipboardCopy, Download, Pause, Play } from 'lucide-react'
+import { Check, ClipboardCopy, Download, Eraser, Pause, Play } from 'lucide-react'
 
 const CORNER = 'absolute h-5 w-5 border-brand-500'
 
@@ -16,6 +16,8 @@ export function PreviewPanel({
   frameIndex,
   isPlaying,
   onTogglePlaying,
+  hasContent,
+  onClearContent,
 }: {
   containerRef: RefObject<HTMLDivElement | null>
   wrapperRef: RefObject<HTMLDivElement | null>
@@ -28,6 +30,8 @@ export function PreviewPanel({
   frameIndex: number
   isPlaying: boolean
   onTogglePlaying: () => void
+  hasContent: boolean
+  onClearContent: () => void
 }) {
   return (
     <div className="order-1 flex flex-col items-center gap-4 md:order-2">
@@ -101,6 +105,16 @@ export function PreviewPanel({
               {copied ? 'Tersalin!' : 'Salin sebagai Gambar'}
             </button>
           </>
+        )}
+
+        {hasContent && (
+          <button
+            type="button"
+            onClick={onClearContent}
+            className="flex w-full items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium text-stone-400 hover:text-stone-600 dark:text-stone-500 dark:hover:text-stone-300"
+          >
+            <Eraser size={13} /> Selesai & Hapus
+          </button>
         )}
       </div>
     </div>

@@ -134,6 +134,11 @@ export function useQrCodeStyling() {
     qrRef.current?.download({ name: 'snapclip-qr', extension })
   }
 
+  function clearContent() {
+    setText('')
+    attachedFileState.clearFile()
+  }
+
   async function copyImage() {
     const raw = await qrRef.current?.getRawData('png')
     if (!raw) return
@@ -192,5 +197,6 @@ export function useQrCodeStyling() {
     copied,
     download,
     copyImage,
+    clearContent,
   }
 }

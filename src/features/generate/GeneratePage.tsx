@@ -115,6 +115,8 @@ export function GeneratePage() {
           frameIndex={qr.frameIndex}
           isPlaying={qr.isPlaying}
           onTogglePlaying={qr.togglePlaying}
+          hasContent={qr.text.trim().length > 0 || qr.attachedFile !== null}
+          onClearContent={qr.clearContent}
         />
       </div>
     </div>
